@@ -29,7 +29,7 @@ public class DeliverOrderVoImpl {
             OPCPackage pkg= OPCPackage.open(directory.getCanonicalPath().toString()+"/source/excel/配送下单规则数据.xlsx");
             XSSFWorkbook excel=new XSSFWorkbook(pkg);
             //获取第一个sheet
-            XSSFSheet sheet0  = excel.getSheetAt(0);
+            XSSFSheet sheet0  = excel.getSheetAt(1);
             int rowNum = sheet0.getLastRowNum()+1;//找到总共几行
             System.out.println("总共行："+rowNum);
             //获取总共几列
@@ -41,13 +41,14 @@ public class DeliverOrderVoImpl {
                 DeliverOrderVO deliverOrderVO = new DeliverOrderVO();
                 //遍历列数
                 deliverOrderVO.setMerchantName(row.getCell(0).getStringCellValue());
-                deliverOrderVO.setShopCode(Double.valueOf(row.getCell(1).getStringCellValue()).intValue());
+                deliverOrderVO.setShopCode(Double.valueOf(row.getCell(1).getNumericCellValue()).intValue());
                 deliverOrderVO.setRuleName(row.getCell(2).getStringCellValue());
                 deliverOrderVO.setDeliverRuleModelStartCreateOrderTime(new SimpleDateFormat("HH:mm").format(row.getCell(3).getDateCellValue()));
                 deliverOrderVO.setDeliverRuleModelEndCreateOrderTime(new SimpleDateFormat("HH:mm").format(row.getCell(4).getDateCellValue()));
                 deliverOrderVO.setLongestDay(Double.valueOf(row.getCell(5).getNumericCellValue()).intValue());
                 deliverOrderVO.setLongestStartTime(new SimpleDateFormat("HH:mm").format(row.getCell(6).getDateCellValue()));
                 deliverOrderVO.setLongestEndTime(new SimpleDateFormat("HH:mm").format(row.getCell(7).getDateCellValue()));
+                deliverOrderVO.setModel(row.getCell(8).getStringCellValue());
                 list.add(deliverOrderVO);
             }
         }

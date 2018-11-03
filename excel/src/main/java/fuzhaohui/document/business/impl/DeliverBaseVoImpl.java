@@ -43,7 +43,7 @@ public class DeliverBaseVoImpl {
             OPCPackage pkg= OPCPackage.open(directory.getCanonicalPath().toString()+"/source/excel/配送基础规则数据表.xlsx");
             XSSFWorkbook excel=new XSSFWorkbook(pkg);
             //获取第一个sheet
-            XSSFSheet sheet0  = excel.getSheetAt(0);
+            XSSFSheet sheet0  = excel.getSheetAt(1);
             int rowNum = sheet0.getLastRowNum()+1;//找到总共几行
             System.out.println("总共行："+rowNum);
             //获取总共几列
@@ -69,10 +69,6 @@ public class DeliverBaseVoImpl {
                 DeliverBaseVO aBDbeliverBaseVO  = deliverBaseVOMap.get(deliverBaseVO.getShopCode()+deliverBaseVO.getModel());
                 if(aBDbeliverBaseVO != null){
                     deliverBaseVO.setPoi(aBDbeliverBaseVO.getPoi());
-                }else{
-                    if("A".equals(deliverBaseVO.getModel()) || "B".equals(deliverBaseVO.getModel())){
-                        System.out.println(deliverBaseVO.getModel() +"    " + deliverBaseVO.getShopCode()+"       "+ deliverBaseVO.getMerchantName());
-                    }
                 }
                 list.add(deliverBaseVO);
             }

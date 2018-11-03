@@ -13,6 +13,8 @@ public class DeliverOrderVO {
 
     private String ruleName;//店铺配送规则名称
 
+    private String model;//配送方式
+
     private String deliverRuleModelStartCreateOrderTime;//同一配送规则各配送时段截单设置下单开始时间
 
     private String deliverRuleModelEndCreateOrderTime;//同一配送规则各配送时段截单设置下单结束时间
@@ -22,6 +24,14 @@ public class DeliverOrderVO {
     private String longestStartTime;//同一配送规则各配送时段最早可配送时段开始时间
 
     private String longestEndTime;//同一配送规则各配送时段最早可配送时段结束时间
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
 
     public String getMerchantName() {
         return merchantName;

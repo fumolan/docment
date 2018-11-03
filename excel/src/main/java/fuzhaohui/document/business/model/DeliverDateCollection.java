@@ -11,9 +11,9 @@ public class DeliverDateCollection {
 
     private MerchantVO merchantVO;
 
-    private List<DeliverOrderVO> deliverOrderVOList;
-
     private List<DeliverBaseVO> deliverBaseVOS;
+
+    private List<DeliverOrderVO> deliverOrderVOList;
 
 
     public MerchantVO getMerchantVO() {
