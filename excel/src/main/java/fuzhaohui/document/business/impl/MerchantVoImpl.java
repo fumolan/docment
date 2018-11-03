@@ -27,7 +27,7 @@ public class MerchantVoImpl {
         List<MerchantVO> merchantVOList = new ArrayList<>();
         try{
             File directory = new File("");//设定为当前文件夹
-            directory = new File(directory.getCanonicalPath().toString()+"/source/txt/商家门店.txt");
+            directory = new File(directory.getCanonicalPath().toString()+"/source/txt/商家门店poi.txt");
             BufferedReader br = new BufferedReader(new FileReader(directory));//构造一个BufferedReader类来读取文件
             br.readLine();//先读一行
             String line = null;
@@ -38,11 +38,14 @@ public class MerchantVoImpl {
                 if("".equals(line)){
                     continue;
                 }
-                String[] str = line.split(",");
+                String[] str = line.split("\\|");
                 MerchantVO merchantVO = new MerchantVO();
                 merchantVO.setMerchantId(Long.valueOf(str[0]));
                 merchantVO.setShopCode(Integer.valueOf(str[1]));
                 merchantVO.setMerchantName(str[2]);
+                if(str.length>3){
+                    merchantVO.setPoi(str[3]);
+                }
                 merchantVOList.add(merchantVO);
             }
             System.out.println("总共行" + totalNum);

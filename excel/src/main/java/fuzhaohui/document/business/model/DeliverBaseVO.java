@@ -29,6 +29,15 @@ public class DeliverBaseVO {
 
     private String fee;//同一配送规则各配送时段服务费
 
+    private String poi;
+
+    public String getPoi() {
+        return poi;
+    }
+
+    public void setPoi(String poi) {
+        this.poi = poi;
+    }
 
     public String getMerchantName() {
         return merchantName;

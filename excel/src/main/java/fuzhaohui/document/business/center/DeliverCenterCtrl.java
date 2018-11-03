@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSON;
 import fuzhaohui.document.business.impl.DeliverBaseVoImpl;
 import fuzhaohui.document.business.impl.DeliverOrderVoImpl;
 import fuzhaohui.document.business.impl.MerchantVoImpl;
-import fuzhaohui.document.business.model.DeliverBaseVO;
-import fuzhaohui.document.business.model.DeliverDateCollection;
-import fuzhaohui.document.business.model.DeliverOrderVO;
-import fuzhaohui.document.business.model.MerchantVO;
+import fuzhaohui.document.business.model.*;
+import net.sf.json.JSONArray;
+import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,9 +73,41 @@ public class DeliverCenterCtrl {
             deliverDateCollections.add(deliverDateCollection);
             merchantNames.add(merchantVO.getMerchantName());
         }
+        //
+
+
+
         System.out.println("组装书局"+deliverDateCollections.size());
         System.out.println(JSON.toJSONString(deliverDateCollections));
         System.out.println(JSON.toJSONString(merchantNames));
+    }
+
+
+    public static String getPoiString(String poiString) {
+        if(!StringUtils.hasLength(poiString)){
+            return null;
+        }
+        String[] poiList =  poiString.split(";");
+        if(null == poiList || poiList.length ==0){
+            return null;
+        }
+        List<PoiDto> list = new ArrayList<>();
+        int i =0;
+        for(String str : poiList){
+            i+=1;
+            //System.out.println(i%2+"   " + poiString.length());
+            if(i%2 == 0){
+                //continue;
+            }
+            String[] point = str.split(",");
+            PoiDto poiDto = new PoiDto();
+            poiDto.setLng(new BigDecimal(point[0].toString().trim()));
+            poiDto.setLat(new BigDecimal(point[1].toString().trim()));
+            list.add(poiDto);
+        }
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.addAll(list);
+        return  jsonArray.toString();
     }
 
 }
