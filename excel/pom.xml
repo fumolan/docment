@@ -20,6 +20,7 @@
     <spring.version>4.3.9.RELEASE</spring.version>
   </properties>
 
+
   <dependencies>
 
     <dependency>
@@ -103,6 +104,16 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.51</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <classifier>jdk15</classifier>
+      <version>2.2.3</version>
+    </dependency>
+
+
 
 
   </dependencies>

@@ -3,15 +3,21 @@ package fuzhaohui.document.business.impl;
 import com.alibaba.fastjson.JSON;
 import fuzhaohui.document.business.model.DeliverBaseVO;
 import fuzhaohui.document.business.model.DeliverOrderVO;
+import fuzhaohui.document.business.model.PoiDto;
+import net.sf.json.JSONArray;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author fuzh
@@ -21,9 +27,16 @@ import java.util.List;
 public class DeliverBaseVoImpl {
 
     public static  List<DeliverBaseVO> getDeliverBaseVo() {
+        List<DeliverBaseVO> aBDeliverBaseVO = ABDeliver.getABDeliverBaseVo();
+        Map<String,DeliverBaseVO> deliverBaseVOMap = new HashMap<>();
+
+        for(DeliverBaseVO deliverBaseVO : aBDeliverBaseVO){
+            deliverBaseVOMap.put(deliverBaseVO.getShopCode()+deliverBaseVO.getModel(),deliverBaseVO);
+        }
+
+
 
         List<DeliverBaseVO> list = new ArrayList<>();
-
         File directory = new File("");//设定为当前文件夹
         try
         {
@@ -52,6 +65,15 @@ public class DeliverBaseVoImpl {
                 deliverBaseVO.setWeekMax(String.valueOf(row.getCell(8).getNumericCellValue()));
                 deliverBaseVO.setWeekendMax(String.valueOf(row.getCell(9).getNumericCellValue()));
                 deliverBaseVO.setFee(String.valueOf(row.getCell(10).getNumericCellValue()));
+                //
+                DeliverBaseVO aBDbeliverBaseVO  = deliverBaseVOMap.get(deliverBaseVO.getShopCode()+deliverBaseVO.getModel());
+                if(aBDbeliverBaseVO != null){
+                    deliverBaseVO.setPoi(aBDbeliverBaseVO.getPoi());
+                }else{
+                    if("A".equals(deliverBaseVO.getModel()) || "B".equals(deliverBaseVO.getModel())){
+                        System.out.println(deliverBaseVO.getModel() +"    " + deliverBaseVO.getShopCode()+"       "+ deliverBaseVO.getMerchantName());
+                    }
+                }
                 list.add(deliverBaseVO);
             }
         }
@@ -65,6 +87,8 @@ public class DeliverBaseVoImpl {
         return list;
 
     }
+
+
 
     public static void main(String[] args) {
         getDeliverBaseVo();
