@@ -43,11 +43,11 @@ public class DeliverOrderVoImpl {
                 deliverOrderVO.setMerchantName(row.getCell(0).getStringCellValue());
                 deliverOrderVO.setShopCode(Double.valueOf(row.getCell(1).getNumericCellValue()).intValue());
                 deliverOrderVO.setRuleName(row.getCell(2).getStringCellValue());
-                deliverOrderVO.setDeliverRuleModelStartCreateOrderTime(new SimpleDateFormat("HH:mm").format(row.getCell(3).getDateCellValue()));
-                deliverOrderVO.setDeliverRuleModelEndCreateOrderTime(new SimpleDateFormat("HH:mm").format(row.getCell(4).getDateCellValue()));
+                deliverOrderVO.setLongestStartTime(new SimpleDateFormat("HH:mm").format(row.getCell(3).getDateCellValue()));
+                deliverOrderVO.setLongestEndTime(new SimpleDateFormat("HH:mm").format(row.getCell(4).getDateCellValue()));
                 deliverOrderVO.setLongestDay(Double.valueOf(row.getCell(5).getNumericCellValue()).intValue());
-                deliverOrderVO.setLongestStartTime(new SimpleDateFormat("HH:mm").format(row.getCell(6).getDateCellValue()));
-                deliverOrderVO.setLongestEndTime(new SimpleDateFormat("HH:mm").format(row.getCell(7).getDateCellValue()));
+                deliverOrderVO.setDeliverRuleModelStartCreateOrderTime(new SimpleDateFormat("HH:mm").format(row.getCell(6).getDateCellValue()));
+                deliverOrderVO.setDeliverRuleModelEndCreateOrderTime(new SimpleDateFormat("HH:mm").format(row.getCell(7).getDateCellValue()));
                 deliverOrderVO.setModel(row.getCell(8).getStringCellValue());
                 list.add(deliverOrderVO);
             }
